@@ -1,0 +1,12 @@
+.icon {
+    width: 71px;
+    height: 34px;
+    display: inline-block;
+    line-height: 1em;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    color: currentColor;
+    vertical-align: middle;
+    fill: var(--chakra-colors-white);
+}

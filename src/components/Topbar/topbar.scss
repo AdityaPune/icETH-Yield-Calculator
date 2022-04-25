@@ -1,0 +1,31 @@
+.appbar {
+    display: flex;
+    flex-direction: row;
+    height: 15vh;
+    width: 100%;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+    .appbar-logo {
+        .appbar-logo-img {
+            max-width: 20vw;
+            height: auto;
+            padding: 1rem;
+        }
+    }
+    .appbar-links {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .appbar-links-item {
+            text-align: center;
+            font-family: Inter;
+            font-weight: bold;
+            font-size: 25px;
+            color: #222222;
+
+            padding-top: 0.85rem;
+            margin-right: 1rem;
+        }
+    }
+}
