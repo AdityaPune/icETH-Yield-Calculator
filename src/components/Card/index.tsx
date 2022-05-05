@@ -58,11 +58,11 @@ function Card() {
                     &nbsp; icETH Interest Earned
                 </div>
 
-                <div className="card-container-segment-header">{grossYield} %</div>
-                {/* <div className="card-container-segment-header">{address}</div> */}
+                {address && <div className="card-container-segment-header">{grossYield} %</div>}
+
                 <div className="card-container-segment-body">
                     {!address && (
-                        <div className="card-container-segment-body-row">
+                        <div className="card-container-segment-body-row-special">
                             <div onClick={connect}>Connect your wallet</div>
                         </div>
                     )}
@@ -73,10 +73,10 @@ function Card() {
                         </div>
                     )}
 
-                    <div className="card-container-segment-body-row">
+                    {/* <div className="card-container-segment-body-row">
                         <div>ETH Price</div>
                         <div>${ethPrice}</div>
-                    </div>
+                    </div> */}
 
                     <div className="card-container-segment-body-row">
                         <div>icETH Price</div>

@@ -26,7 +26,7 @@
         }
 
         .card-container-segment-body {
-            margin-top: 3rem;
+            margin-top: 1.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -42,6 +42,18 @@
                 font-weight: bold;
                 font-size: 15px;
                 color: #222222;
+            }
+
+            .card-container-segment-body-row-special {
+                cursor: pointer;
+                background-color: #6daeee;
+                border-radius: 4px;
+                font-family: Inter;
+                font-weight: bold;
+                font-size: 15px;
+                color: #222222;
+                padding: 12px;
+                margin-bottom: 1.5rem;
             }
         }
     }
