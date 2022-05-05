@@ -18,6 +18,15 @@
             font-weight: bold;
             font-size: 25px;
             color: #222222;
+            // @media screen and (max-width: 600px) {
+            //     display: flex;
+            //     justify-content: center;
+            //     align-items: center;
+            //     font-family: Inter;
+            //     font-weight: bold;
+            //     font-size: 25px;
+            //     color: #222222;
+            // }
 
             .card-container-segment-header-icon {
                 width: 25px;
@@ -42,6 +51,34 @@
                 font-weight: bold;
                 font-size: 15px;
                 color: #222222;
+                .card-container-segment-row-icon {
+                    height: 10px;
+                    width: auto;
+                }
+                @media screen and (min-width: 451px) and (max-width: 750px) {
+                    width: 85%;
+                    padding: 0.5rem 1.5rem;
+                    font-size: 15px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-family: Inter;
+                    font-weight: bold;
+                    color: #222222;
+                }
+                @media screen and (max-width: 450px) {
+                    width: 100%;
+                    padding: 0.5rem 0.5rem;
+                    font-size: 10px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-family: Inter;
+                    font-weight: bold;
+                    color: #222222;
+                }
             }
 
             .card-container-segment-body-row-special {

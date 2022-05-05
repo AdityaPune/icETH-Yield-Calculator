@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import "./card.scss";
 import { Grid, Box } from "@material-ui/core";
 import IceCube from "./Icons/icecube-2.png";
+import GreenArrow from "./Icons/green2.png";
 import { getTokenPrice } from "../../helpers";
 import { useAddress, useWeb3Context } from "../../hooks";
 import { IReduxState } from "../../store/Slices/state.interface";
@@ -17,6 +18,7 @@ function Card() {
     const valueInEth = (icethPrice / ethPrice).toFixed(4);
     const [result, setResult] = useState({});
     const { provider, connect, chainID, checkWrongNetwork } = useWeb3Context();
+    const percIncrease = ((icethPrice - ethPrice) / icethPrice).toFixed(4);
 
     const address = useAddress();
 
@@ -84,7 +86,11 @@ function Card() {
                     </div>
 
                     <div className="card-container-segment-body-row">
-                        <div>icETH in ETH</div>
+                        <div>
+                            Value in ETH&nbsp;(
+                            <span>{percIncrease}%</span>
+                            <img src={GreenArrow} className="card-container-segment-row-icon" />)
+                        </div>
                         <div>{valueInEth} ETH</div>
                     </div>
 
