@@ -5,5 +5,5 @@ A simple webapp to calculate the yield of your icETH and
 INFURA_ENDPOINT=
 
 ### Run following commands
-1. npm install
-2. npm run start
+1. `npm install`
+2. `npm run start`
