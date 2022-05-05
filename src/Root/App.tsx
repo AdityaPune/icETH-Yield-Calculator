@@ -5,6 +5,8 @@ import { useAddress, useWeb3Context } from "../hooks";
 import "./style.scss";
 import { getTokenPrice } from "../helpers";
 import Topbar from "src/components/Topbar";
+import Card from "src/components/Card";
+import { getBalances } from "src/store/Slices/balance-slice";
 
 function App() {
     const dispatch = useDispatch();
@@ -12,7 +14,7 @@ function App() {
     const [walletChecked, setWalletChecked] = useState(false);
     const ethPrice = getTokenPrice("ETH");
 
-    const { connect, disconnect, connected, web3, providerChainID, hasCachedProvider, checkWrongNetwork, chainID } = useWeb3Context();
+    const { connect, disconnect, connected, web3, provider, providerChainID, hasCachedProvider, checkWrongNetwork, chainID } = useWeb3Context();
 
     const connectToDapp = () => {
         if (hasCachedProvider()) {
@@ -24,13 +26,38 @@ function App() {
         }
     };
 
-    useEffect(connectToDapp, []);
+    async function loadDetails() {
+        console.log("Holllaa");
+        loadConvert(provider);
+    }
+
+    const loadConvert = useCallback(
+        loadProvider => {
+            dispatch(getBalances({ address, networkID: chainID, provider: loadProvider }));
+        },
+        [connected],
+    );
+
+    useEffect(() => {
+        if (hasCachedProvider()) {
+            connect().then(() => {
+                setWalletChecked(true);
+            });
+        } else {
+            setWalletChecked(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (walletChecked) {
+            loadDetails();
+        }
+    }, [walletChecked]);
 
     return (
         <div className="root-app">
             <Topbar />
-            Hello World {ethPrice}
-            {!connected && <button onClick={connectToDapp}>Click me</button>}
+            <Card />
         </div>
     );
 }

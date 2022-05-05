@@ -3,6 +3,7 @@ import App from "./App";
 import Landing from "./Landing";
 import { HashRouter } from "react-router-dom";
 import { loadTokenPrices } from "../helpers";
+// import { storeVariables } from "../helpers";
 import Loading from "../components/Loader";
 
 function Root() {
@@ -11,6 +12,10 @@ function Root() {
     useEffect(() => {
         loadTokenPrices().then(() => setLoading(false));
     }, []);
+
+    // useEffect(() => {
+    //     storeVariables().then(() => setBlah(false));
+    // }, []);
 
     if (loading) return <Loading />;
 

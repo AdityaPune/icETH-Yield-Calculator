@@ -1,9 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
+import balanceReducer from "./Slices/balance-slice";
 
 const store = configureStore({
-    reducer: {
-        // account:
-    },
+    reducer: { balance: balanceReducer },
     middleware: getDefaultMiddleware => getDefaultMiddleware({ serializableCheck: false }),
 });
 
