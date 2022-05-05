@@ -40,9 +40,9 @@ export const getBalances = createAsyncThunk("icETH/getBalances", async ({ addres
 
     const lido_Contract = new ethers.Contract(addresses.lido_ORACLE, lidoOracleContract, provider);
     const lido_Info = await lido_Contract.getLastCompletedReportDelta();
-    const postEth = ethers.utils.formatUnits(lido_Info[0], 18);
-    const preEth = ethers.utils.formatUnits(lido_Info[1], 18);
-    const time = ethers.utils.formatUnits(lido_Info[2], 0);
+    const postEth = ethers.utils.formatUnits(lido_Info[0], 0);
+    const preEth = ethers.utils.formatUnits(lido_Info[1], 0);
+    const timeElapsed = ethers.utils.formatUnits(lido_Info[2], 0);
 
     return {
         icETH_Bal: ethers.utils.formatUnits(icETH_Balance, 18),
@@ -50,7 +50,7 @@ export const getBalances = createAsyncThunk("icETH/getBalances", async ({ addres
         borrow_Rate: ethers.utils.formatUnits(borrowRate_wETH.currentVariableBorrowRate, 25),
         postEth,
         preEth,
-        timeElapsed: time,
+        timeElapsed,
     };
 });
 

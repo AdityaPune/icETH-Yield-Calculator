@@ -16,6 +16,7 @@ function Card() {
     const icethPrice = getTokenPrice("icETH");
     const valueInEth = (icethPrice / ethPrice).toFixed(4);
     const [result, setResult] = useState({});
+    const { provider, connect, chainID, checkWrongNetwork } = useWeb3Context();
 
     const address = useAddress();
 
@@ -24,7 +25,7 @@ function Card() {
     });
 
     const preEth = useSelector<IReduxState, string>(state => {
-        return state.balance && state.balance.postEth;
+        return state.balance && state.balance.preEth;
     });
 
     const timeElapsed = useSelector<IReduxState, string>(state => {
@@ -33,7 +34,9 @@ function Card() {
 
     const TOTAL_SECONDS = 60 * 60 * 24 * 365;
 
-    const stEth = (((Number(postEth) - Number(preEth)) * TOTAL_SECONDS) / (Number(preEth) * Number(timeElapsed))).toFixed(4);
+    const stEth = 3.67;
+
+    const actualStEth = ((Number(postEth) - Number(preEth)) * TOTAL_SECONDS) / (Number(preEth) * Number(timeElapsed));
 
     const borrowRate = useSelector<IReduxState, string>(state => {
         return state.balance && state.balance.borrow_Rate;
@@ -55,25 +58,21 @@ function Card() {
                     &nbsp; icETH Interest Earned
                 </div>
 
-                <div className="card-container-segment-header">{grossYield}</div>
+                <div className="card-container-segment-header">{grossYield} %</div>
                 {/* <div className="card-container-segment-header">{address}</div> */}
                 <div className="card-container-segment-body">
-                    <div className="card-container-segment-body-row">
-                        <div>Gross Yield vs ETH</div>
-                        <div>{icETH_Bal}%</div>
-                    </div>
-                    <div className="card-container-segment-body-row">
-                        <div>Borrow Rate</div>
-                        <div>${borrowRate}</div>
-                    </div>
-                    <div className="card-container-segment-body-row">
-                        <div>Lev Ratio</div>
-                        <div>${leverageRatio}</div>
-                    </div>
-                    <div className="card-container-segment-body-row">
-                        <div>st Eth</div>
-                        <div>${stEth}</div>
-                    </div>
+                    {!address && (
+                        <div className="card-container-segment-body-row">
+                            <div onClick={connect}>Connect your wallet</div>
+                        </div>
+                    )}
+                    {address && (
+                        <div className="card-container-segment-body-row">
+                            <div>Your icETH Balance</div>
+                            <div>{icETH_Bal}</div>
+                        </div>
+                    )}
+
                     <div className="card-container-segment-body-row">
                         <div>ETH Price</div>
                         <div>${ethPrice}</div>
@@ -88,6 +87,11 @@ function Card() {
                         <div>icETH in ETH</div>
                         <div>{valueInEth} ETH</div>
                     </div>
+
+                    {/* <div className="card-container-segment-body-row">
+                        <div>Correct</div>
+                        <div>{actualStEth} </div>
+                    </div> */}
                 </div>
             </div>
         </div>
