@@ -20,7 +20,7 @@ function Topbar() {
                     {" "}
                     <div className="appbar-links-item">Resources</div>
                 </Link>
-                "
+
                 <Link href="https://gov.indexcoop.com/" target="blank">
                     {" "}
                     <div className="appbar-links-item">Forum</div>

@@ -1,22 +1,16 @@
-import { ethers } from "ethers";
 import "./card.scss";
-import { Grid, Box } from "@material-ui/core";
 import IceCube from "./Icons/icecube-2.png";
 import GreenArrow from "./Icons/green2.png";
 import { getTokenPrice } from "../../helpers";
 import { useAddress, useWeb3Context } from "../../hooks";
 import { IReduxState } from "../../store/Slices/state.interface";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { getBalances } from "src/store/valueFinder";
-import { delay } from "lodash";
-import { EtherscanProvider, JsonRpcProvider, StaticJsonRpcProvider, Web3Provider } from "@ethersproject/providers";
+import CountUp from "react-countup";
 
 function Card() {
     const ethPrice = getTokenPrice("ETH");
     const icethPrice = getTokenPrice("icETH");
     const valueInEth = (icethPrice / ethPrice).toFixed(4);
-    const [result, setResult] = useState({});
     const { provider, connect, chainID, checkWrongNetwork } = useWeb3Context();
     const percIncrease = ((icethPrice - ethPrice) / icethPrice).toFixed(4);
 
@@ -59,10 +53,14 @@ function Card() {
             <div className="card-container-segment">
                 <div className="card-container-segment-header">
                     <img src={IceCube} className="card-container-segment-header-icon" />
-                    &nbsp; icETH Interest Earned
+                    &nbsp; icETH Interest
                 </div>
 
-                {address && <div className="card-container-segment-header">{grossYield} %</div>}
+                {address && (
+                    <div className="card-container-segment-header">
+                        <CountUp start={0} end={Number(grossYield)} duration={1} decimals={4} />%
+                    </div>
+                )}
 
                 <div className="card-container-segment-body">
                     {!address && (
@@ -72,20 +70,26 @@ function Card() {
                     )}
                     {address && (
                         <div className="card-container-segment-body-row">
-                            <div>Your icETH Balance</div>
+                            <div className="card-container-segment-body-row-unit">
+                                Balance &nbsp;
+                                <img src={IceCube} className="card-container-segment-body-row-icon" />
+                            </div>
                             <div>{icETH_Bal}</div>
                         </div>
                     )}
 
                     <div className="card-container-segment-body-row">
-                        <div>icETH Price</div>
+                        <div className="card-container-segment-body-row-unit">
+                            Price&nbsp;
+                            <img src={IceCube} className="card-container-segment-body-row-icon" />
+                        </div>
                         <div>${icethPrice}</div>
                     </div>
 
                     <div className="card-container-segment-body-row">
                         <div>
-                            Value in ETH&nbsp;(
-                            <span>{percIncrease}%</span>
+                            Value in ETH
+                            <br />(<span>{percIncrease}%</span>
                             <img src={GreenArrow} className="card-container-segment-row-icon" />)
                         </div>
                         <div>{valueInEth} ETH</div>
