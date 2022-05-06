@@ -4,7 +4,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import "./topbar.scss";
 import IndexCoopIcon from "./icons/IndexCoopIcon";
 import ICLogo from "./icons/ICLogo.png";
-import { Grid, Box } from "@material-ui/core";
+import { Link } from "@material-ui/core";
 
 function Topbar() {
     return (
@@ -13,10 +13,22 @@ function Topbar() {
                 <img src={ICLogo} className="appbar-logo-img" />
             </div>
             <div className="appbar-links">
-                <div className="appbar-links-item">Products</div>
-                <div className="appbar-links-item">Resources</div>
-                <div className="appbar-links-item">Community</div>
-                <div className="appbar-links-item-special">APP</div>
+                <Link href="https://indexcoop.com/" target="_blank">
+                    <div className="appbar-links-item">Products</div>
+                </Link>
+                <Link href="https://docs.indexcoop.com/" target="_blank">
+                    {" "}
+                    <div className="appbar-links-item">Resources</div>
+                </Link>
+                "
+                <Link href="https://gov.indexcoop.com/" target="blank">
+                    {" "}
+                    <div className="appbar-links-item">Forum</div>
+                </Link>
+                <Link href="https://app.indexcoop.com/" target="_blank">
+                    {" "}
+                    <div className="appbar-links-item-special">APP</div>
+                </Link>
             </div>
         </div>
     );

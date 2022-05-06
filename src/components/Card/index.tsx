@@ -36,9 +36,11 @@ function Card() {
 
     const TOTAL_SECONDS = 60 * 60 * 24 * 365;
 
+    //This is the value (usually) shown on Dune Analytics
     const stEth = 3.67;
 
-    const actualStEth = ((Number(postEth) - Number(preEth)) * TOTAL_SECONDS) / (Number(preEth) * Number(timeElapsed));
+    //This is the actual expected stETH value retrieved from the contract
+    const actualStEth = (100 * ((Number(postEth) - Number(preEth)) * TOTAL_SECONDS)) / (Number(preEth) * Number(timeElapsed));
 
     const borrowRate = useSelector<IReduxState, string>(state => {
         return state.balance && state.balance.borrow_Rate;
@@ -50,7 +52,7 @@ function Card() {
         return state.balance && state.balance.icETH_Bal;
     });
 
-    const grossYield = Number((Number(stEth) - Number(borrowRate)) * (Number(leverageRatio) - 1) + stEth).toFixed(4);
+    const grossYield = Number((Number(actualStEth) - Number(borrowRate)) * (Number(leverageRatio) - 1) + stEth).toFixed(4);
 
     return (
         <div className="card-container">
@@ -74,11 +76,6 @@ function Card() {
                             <div>{icETH_Bal}</div>
                         </div>
                     )}
-
-                    {/* <div className="card-container-segment-body-row">
-                        <div>ETH Price</div>
-                        <div>${ethPrice}</div>
-                    </div> */}
 
                     <div className="card-container-segment-body-row">
                         <div>icETH Price</div>

@@ -3,7 +3,6 @@ import Root from "./Root";
 import store from "./store/store";
 import { Provider } from "react-redux";
 import { Web3ContextProvider } from "./hooks";
-import { SnackbarProvider } from "notistack";
 
 ReactDOM.render(
     // <SnackbarProvider

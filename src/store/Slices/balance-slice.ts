@@ -22,21 +22,16 @@ interface IBalances {
 }
 
 export const getBalances = createAsyncThunk("icETH/getBalances", async ({ address, networkID, provider }: IGetBalances): Promise<IBalances> => {
-    console.log("This is it");
-    console.log(address, networkID, provider);
     const addresses = getAddresses(networkID);
 
     const icETH_Contract = new ethers.Contract(addresses.icETH_ADDRESS, icETHContract, provider);
     const icETH_Balance = await icETH_Contract.balanceOf(address);
-    console.log("Bal", ethers.utils.formatUnits(icETH_Balance, 18));
 
     const icETH_Strat_Contract = new ethers.Contract(addresses.icETH_STRAT, icETHStratContract, provider);
     const leverageRatio = await icETH_Strat_Contract.getCurrentLeverageRatio();
-    console.log("Lev ratio", ethers.utils.formatUnits(leverageRatio, 18));
 
     const aave_Pool_Contract = new ethers.Contract(addresses.aave_POOL, aavePoolContract, provider);
     const borrowRate_wETH = await aave_Pool_Contract.getReserveData(addresses.wETH_ADDRESS);
-    console.log("Borrow rate", ethers.utils.formatEther(borrowRate_wETH.currentVariableBorrowRate));
 
     const lido_Contract = new ethers.Contract(addresses.lido_ORACLE, lidoOracleContract, provider);
     const lido_Info = await lido_Contract.getLastCompletedReportDelta();
